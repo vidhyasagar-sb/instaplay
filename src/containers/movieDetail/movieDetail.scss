@@ -1,0 +1,83 @@
+@import "/src/styles/variables";
+
+.movieDetail {
+  .descriptionWrapper {
+    display: flex;
+    background-color: $color-black-0;
+  }
+
+  .movieDescription {
+    margin: 0 34px 0 56px;
+    color: $color-white-0;
+    flex-basis: 40%;
+    height: 90vh;
+
+    h2 {
+      margin-bottom: 12px;
+      font-weight: 500;
+      font-size: 42px;
+      line-height: 50px;
+    }
+    .rating {
+      margin-bottom: 12px;
+    }
+
+    .plot {
+      opacity: 0.7;
+      margin-bottom: 24px;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 30px;
+    }
+  }
+
+  .leftArrow {
+    margin: 61px 0 60px 0;
+    cursor: pointer;
+    display: inline-block;
+  }
+
+  .releaseTitle {
+    width: 146px;
+  }
+
+  .releaseDateWrapper {
+    display: flex;
+    gap: 34px;
+    margin-bottom: 20px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  .languageWrapper {
+    display: flex;
+    gap: 34px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  .backdropContainer {
+    flex-basis: 60%;
+    position: relative;
+    width: 852px;
+    height: 650px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      vertical-align: bottom;
+      object-fit: cover;
+    }
+  }
+  .backdropContainer::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #000000 0%, rgba(0, 0, 0, 0) 100%);
+  }
+}
