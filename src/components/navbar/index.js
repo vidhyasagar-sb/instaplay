@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./navbar.scss";
 import logo from "../../assets/images/logo.svg";
@@ -8,9 +8,15 @@ const Navbar = (props) => {
   const searchBar = props.searchBar;
   const searchList = props.searchList;
   const navigate = useNavigate();
+  const [keyword, setKeyword] = useState("");
 
   const clickHandler = () => {
-    navigate("/");
+    navigate(0);
+  };
+
+  const changeHandler = (e) => {
+    setKeyword(e.target.value);
+    searchList(e.target.value);
   };
 
   return (
@@ -20,7 +26,8 @@ const Navbar = (props) => {
         <input
           type="search"
           placeholder="Search movies"
-          onChange={(e) => searchList(e.target.value)}
+          value={keyword}
+          onChange={changeHandler}
         />
       ) : (
         ""

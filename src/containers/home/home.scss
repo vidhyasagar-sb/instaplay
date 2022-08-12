@@ -2,6 +2,8 @@
 
 .home {
   background-color: $color-blue-2;
+  padding-bottom: 114px;
+  min-height: 100vh;
 
   .banner {
     display: flex;
@@ -21,12 +23,35 @@
     line-height: 42px;
   }
 
-  .cardWrapper {
-    padding: 0 52px 0 60px;
+  .noResult {
+    text-align: center;
+  }
+
+  .homepageRedirect {
+    text-align: center;
+    font-size: 12px;
+    color: #ff7e64;
+    span {
+      cursor: pointer;
+
+      &:hover,
+      &:active {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .loader {
     display: flex;
-    flex-wrap: wrap;
-    row-gap: 32px;
-    gap: 16px;
-    justify-content: center;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .home {
+    .banner {
+      height: 118px;
+      object-fit: cover;
+    }
   }
 }

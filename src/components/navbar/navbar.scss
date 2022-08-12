@@ -32,3 +32,17 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 16px 20px;
+    border-radius: 4px;
+    input {
+      max-width: 334px;
+      width: 100%;
+    }
+  }
+}

@@ -51,3 +51,11 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .card {
+    .cardHead {
+      padding: 12px 24px;
+    }
+  }
+}

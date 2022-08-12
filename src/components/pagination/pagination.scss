@@ -1,0 +1,53 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+}
+
+.paginationItem {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+  span {
+    color: #fff;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    opacity: 0.6;
+    outline: none;
+  }
+}
+
+.prev,
+.next {
+  cursor: pointer;
+}
+
+.paginationItem.active {
+  text-decoration-line: underline;
+  pointer-events: none;
+
+  span {
+    opacity: 1;
+    text-decoration-line: underline;
+    color: #ff6a63;
+  }
+}
+
+.prev.disabled,
+.next.disabled {
+  display: none;
+  pointer-events: none;
+  box-shadow: none;
+}
+
+.cardWrapper {
+  padding: 0 52px 0 60px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 52px;
+}

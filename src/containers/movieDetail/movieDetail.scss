@@ -1,16 +1,19 @@
 @import "/src/styles/variables";
 
 .movieDetail {
+  background-color: $color-blue-2;
   .descriptionWrapper {
     display: flex;
     background-color: $color-black-0;
+    padding: 28px;
+    position: relative;
   }
 
   .movieDescription {
     margin: 0 34px 0 56px;
     color: $color-white-0;
     flex-basis: 40%;
-    height: 90vh;
+    min-height: 90vh;
 
     h2 {
       margin-bottom: 12px;
@@ -32,6 +35,7 @@
   }
 
   .leftArrow {
+    font-size: 28px;
     margin: 61px 0 60px 0;
     cursor: pointer;
     display: inline-block;
@@ -79,5 +83,57 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg, #000000 0%, rgba(0, 0, 0, 0) 100%);
+  }
+}
+
+@media (max-width: 768px) {
+  .movieDetail {
+    .descriptionWrapper {
+      flex-direction: column-reverse;
+      gap: 20px;
+      background-color: $color-blue-2;
+      padding: 0 0 28px 0;
+    }
+
+    .backdropContainer {
+      flex-basis: auto;
+      width: auto;
+      height: 260px;
+      &::after {
+        background: linear-gradient(
+          0deg,
+          rgba(0, 0, 0, 0.8) 0%,
+          rgba(0, 0, 0, 0) 100%
+        );
+      }
+      img {
+        object-position: 0 0;
+      }
+    }
+
+    .movieDescription {
+      margin: 0 20px;
+      min-height: 70vh;
+      h2 {
+        font-size: 24px;
+        line-height: 29px;
+      }
+      .rating {
+        margin-bottom: 12px;
+      }
+
+      .plot {
+        font-size: 16px;
+        line-height: 24px;
+      }
+    }
+
+    .leftArrow {
+      position: absolute;
+      top: 10px;
+      left: 20px;
+      z-index: 1;
+      margin: 0;
+    }
   }
 }

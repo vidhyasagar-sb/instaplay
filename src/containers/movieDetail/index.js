@@ -34,7 +34,7 @@ const MovieDetail = () => {
   };
 
   if (loading) {
-    return <div>Loading</div>;
+    return <div className="loader">Loading</div>;
   }
 
   if (Object.keys(movieDetails).length === 0) {

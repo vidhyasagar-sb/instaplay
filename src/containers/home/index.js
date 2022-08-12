@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import "./home.scss";
+import banner from "../../assets/images/banner.png";
+import loading from "../../assets/images/loading.gif";
 
 import Navbar from "../../components/navbar";
-import Card from "../../components/card";
-
-import banner from "../../assets/images/banner.png";
+import Pagination from "../../components/pagination";
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [result, setResult] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState();
+  const [loader, setLoader] = useState(false);
 
   const navigate = useNavigate();
 
@@ -20,33 +23,38 @@ const Home = () => {
   useEffect(() => {
     const getMovies = async () => {
       const response = await axios.get(
-        "https://api.themoviedb.org/3/movie/popular?api_key=d0605f7c77a7e9ffd22f6f77c12e0f8f&language=en-US&page=1"
+        `https://api.themoviedb.org/3/movie/popular?api_key=d0605f7c77a7e9ffd22f6f77c12e0f8f&language=en-US&page=${page}`
       );
       setMovies(response.data.results);
     };
     getMovies();
-  }, []);
+  }, [page]);
 
   //Search results
   useEffect(() => {
     const getMovies = async (term) => {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/search/movie?api_key=d0605f7c77a7e9ffd22f6f77c12e0f8f&language=en-US&query=${term}&page=1&include_adult=false`
+        `https://api.themoviedb.org/3/search/movie?api_key=d0605f7c77a7e9ffd22f6f77c12e0f8f&language=en-US&query=${term}&page=${page}&include_adult=false`
       );
-      console.log(response.data);
+      setTotalPages(response.data.total_pages);
       setResult(response.data.results);
+      setLoader(false);
     };
 
     if (searchTerm.length !== 0) {
       const cancelTimeout = setTimeout(() => {
         getMovies(searchTerm);
-      }, 2000);
+      }, 1000);
 
       return () => {
         clearTimeout(cancelTimeout);
       };
     }
-  }, [searchTerm]);
+  }, [searchTerm, page]);
+
+  const pageHandler = (num) => {
+    setPage(num);
+  };
 
   const clickHandler = (id) => {
     navigate(`/detail/${id}`);
@@ -54,28 +62,61 @@ const Home = () => {
 
   const searchHandler = (data) => {
     setSearchTerm(data);
+    setLoader(true);
   };
+
+  const redirectHome = () => {
+    navigate(0);
+  };
+
+  let content;
+
+  if (searchTerm.length !== 0 && loader) {
+    content = <img className="loader" src={loading} alt="loading" />;
+  }
+
+  if (searchTerm.length === 0) {
+    content = (
+      <Pagination
+        data={movies}
+        heading={"Trending"}
+        findPage={pageHandler}
+        pageLimit={6}
+        totalPage={totalPages}
+      />
+    );
+  }
+
+  if (result.length !== 0 && searchTerm.length !== 0) {
+    content = (
+      <Pagination
+        data={result}
+        heading={"Search results:"}
+        findPage={pageHandler}
+        pageLimit={totalPages > 6 ? 6 : totalPages}
+        totalPage={totalPages}
+      />
+    );
+  }
+  if (totalPages === 0) {
+    content = (
+      <>
+        <div className="headingContainer">
+          <h2>Search results:</h2>
+        </div>
+        <h2 className="noResult">No movies found</h2>
+        <p className="homepageRedirect">
+          <span onClick={redirectHome}>click here</span> to go back to homepage
+        </p>
+      </>
+    );
+  }
 
   return (
     <div className="home">
       <Navbar searchBar={true} searchList={searchHandler} />
       <img className="banner" src={banner} alt="movie banner" />
-      <div className="headingContainer">
-        <h2>{result.length === 0 ? "Trending" : "Search Results:"}</h2>
-      </div>
-      <div className="cardWrapper">
-        {(result.length === 0 ? movies : result).map((movie, index) => {
-          return (
-            <Card
-              title={movie.title || movie.name}
-              image={movie.poster_path}
-              rating={(movie.vote_average / 2).toFixed(2)}
-              key={index}
-              onClicking={() => clickHandler(movie.id)}
-            />
-          );
-        })}
-      </div>
+      {content}
     </div>
   );
 };
