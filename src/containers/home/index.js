@@ -56,10 +56,6 @@ const Home = () => {
     setPage(num);
   };
 
-  const clickHandler = (id) => {
-    navigate(`/detail/${id}`);
-  };
-
   const searchHandler = (data) => {
     setSearchTerm(data);
     setLoader(true);

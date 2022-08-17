@@ -6,10 +6,13 @@ import Navbar from "../../components/navbar";
 import "./movieDetail.scss";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Modal from "../../components/modal";
 
 const MovieDetail = () => {
   const [movieDetails, setMovieDetails] = useState({});
   const [loading, setLoading] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
+  const [movieVideo, setMovieVideo] = useState();
   const params = useParams();
   const navigate = useNavigate();
 
@@ -29,9 +32,33 @@ const MovieDetail = () => {
     getMovieDetail(params.id);
   }, [params.id]);
 
+  useEffect(() => {
+    const getMovieVideo = async (id) => {
+      try {
+        const response = await axios.get(
+          `https://api.themoviedb.org/3/movie/${id}/videos?api_key=d0605f7c77a7e9ffd22f6f77c12e0f8f&language=en-US`
+        );
+        setMovieVideo(
+          response.data.results.filter((movie) => {
+            return movie.type === "Trailer";
+          })[0]
+        );
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+    getMovieVideo(params.id);
+  }, [params.id]);
+
   const goBackHomepage = () => {
     navigate(-1);
   };
+
+  if (openModal) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+  }
 
   if (loading) {
     return <div className="loader">Loading</div>;
@@ -69,6 +96,16 @@ const MovieDetail = () => {
                   .join(", ")}
               </p>
             </div>
+            {movieVideo ? (
+              <button className="trailerBtn" onClick={() => setOpenModal(true)}>
+                Play trailer
+              </button>
+            ) : (
+              ""
+            )}
+            {openModal && (
+              <Modal closeModal={setOpenModal} videoKey={movieVideo.key} />
+            )}
           </div>
           <div className="backdropContainer">
             <img

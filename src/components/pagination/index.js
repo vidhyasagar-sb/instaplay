@@ -36,6 +36,7 @@ const Pagination = ({ data, heading, findPage, pageLimit, totalPage }) => {
   const clickHandler = (id) => {
     navigate(`/detail/${id}`);
   };
+
   return (
     <div>
       <div className="headingContainer">
@@ -45,6 +46,7 @@ const Pagination = ({ data, heading, findPage, pageLimit, totalPage }) => {
         {data.map((movie, index) => {
           return (
             <Card
+              id={movie.id}
               title={movie.title || movie.name}
               image={movie.poster_path}
               rating={(movie.vote_average / 2).toFixed(2)}
