@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./card.scss";
 
 import play from "../../assets/images/playButton.svg";
-import star from "../../assets/images/star.svg";
 import axios from "axios";
+import Rating from "../rating";
 
 const Card = (props) => {
   const [hover, setHover] = useState(false);
@@ -30,8 +30,6 @@ const Card = (props) => {
   }, [props.id]);
 
   let content;
-
-  console.log(video);
 
   if (hover && video) {
     content = (
@@ -60,13 +58,14 @@ const Card = (props) => {
           onClick={props.onClicking}
         />
         {content}
+        <div className="overlay"></div>
       </div>
       <div className="cardHead">
         <div className="cardTitleWrapper">
           <h3>{props.title}</h3>
           <div className="rating">
-            <img src={star} alt="star" />
-            <p>{props.rating}/5</p>
+            {/* <p>{props.rating}/5</p> */}
+            <Rating value={props.rating} />
           </div>
         </div>
         <img

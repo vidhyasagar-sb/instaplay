@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import "./home.scss";
-import banner from "../../assets/images/banner.png";
 import loading from "../../assets/images/loading.gif";
 
 import Navbar from "../../components/navbar";
 import Pagination from "../../components/pagination";
+import Slider from "../../components/slider";
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
@@ -107,11 +107,11 @@ const Home = () => {
       </>
     );
   }
-
   return (
     <div className="home">
-      <Navbar searchBar={true} searchList={searchHandler} />
-      <img className="banner" src={banner} alt="movie banner" />
+      <Navbar searchBar={true} searchList={searchHandler} loader={loader} />
+      {movies.length !== 0 && <Slider movie={movies.slice(0, 4)} />}
+      {/* <img className="banner" src={banner} alt="movie banner" /> */}
       {content}
     </div>
   );

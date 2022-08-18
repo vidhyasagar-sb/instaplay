@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 const Navbar = (props) => {
   const searchBar = props.searchBar;
   const searchList = props.searchList;
+  const loader = props.loader;
   const navigate = useNavigate();
   const [keyword, setKeyword] = useState("");
 
@@ -28,6 +29,7 @@ const Navbar = (props) => {
           placeholder="Search movies"
           value={keyword}
           onChange={changeHandler}
+          className={loader ? "load" : ""}
         />
       ) : (
         ""
