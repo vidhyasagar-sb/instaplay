@@ -13,7 +13,7 @@ const Pagination = ({ data, heading, findPage, pageLimit, totalPage }) => {
   useEffect(() => {
     findPage(currentPage);
     window.scrollTo({ behavior: "smooth", top: "0px" });
-  }, [currentPage]);
+  }, [currentPage, findPage]);
 
   function goToNextPage() {
     setCurrentPage((page) => page + 1);

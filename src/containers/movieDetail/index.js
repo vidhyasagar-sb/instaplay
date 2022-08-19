@@ -50,9 +50,7 @@ const MovieDetail = () => {
     getMovieVideo(params.id);
   }, [params.id]);
 
-  const goBackHomepage = () => {
-    navigate(-1);
-  };
+  const goBackHomepage = () => navigate(-1);
 
   if (openModal) {
     document.body.style.overflow = "hidden";

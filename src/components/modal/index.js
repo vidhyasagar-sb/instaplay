@@ -28,8 +28,6 @@ const Modal = ({ closeModal, videoKey }) => {
           </button>
         </div>
         <iframe
-          width="800"
-          height="450"
           src={`https://www.youtube-nocookie.com/embed/${videoKey}?autoplay=1&mute=1`}
           title="YouTube video player"
           frameBorder="0"

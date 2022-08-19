@@ -9,7 +9,7 @@
     display: flex;
     width: 100%;
     margin: 8px 0 56px 0;
-    height: 300px;
+    height: 350px;
     object-position: 50% 50%;
     object-fit: cover;
   }
@@ -52,8 +52,10 @@
 
 @media (max-width: 768px) {
   .home {
+    margin-top: 139px;
+
     .banner {
-      height: 118px;
+      height: 200px;
       object-fit: cover;
     }
   }

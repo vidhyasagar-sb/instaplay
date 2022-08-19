@@ -12,7 +12,7 @@ const Navbar = (props) => {
   const [keyword, setKeyword] = useState("");
 
   const clickHandler = () => {
-    navigate(0);
+    navigate("/");
   };
 
   const changeHandler = (e) => {

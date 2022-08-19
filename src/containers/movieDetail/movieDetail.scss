@@ -5,7 +5,6 @@
   .descriptionWrapper {
     display: flex;
     background-color: $color-black-0;
-    // padding-bottom: 28px;
     position: relative;
   }
 
@@ -111,6 +110,7 @@
     }
 
     .backdropContainer {
+      margin-top: 77px;
       flex-basis: auto;
       width: auto;
       height: 260px;
@@ -145,7 +145,7 @@
 
     .leftArrow {
       position: absolute;
-      top: 10px;
+      top: 87px;
       left: 20px;
       z-index: 1;
       margin: 0;

@@ -64,7 +64,6 @@ const Card = (props) => {
         <div className="cardTitleWrapper">
           <h3>{props.title}</h3>
           <div className="rating">
-            {/* <p>{props.rating}/5</p> */}
             <Rating value={props.rating} />
           </div>
         </div>

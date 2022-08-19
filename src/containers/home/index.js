@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
 import "./home.scss";
+
 import loading from "../../assets/images/loading.gif";
 
 import Navbar from "../../components/navbar";
@@ -16,6 +16,7 @@ const Home = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState();
   const [loader, setLoader] = useState(false);
+  const [bannerMovies, setBannerMovies] = useState([]);
 
   const navigate = useNavigate();
 
@@ -23,12 +24,23 @@ const Home = () => {
   useEffect(() => {
     const getMovies = async () => {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/popular?api_key=d0605f7c77a7e9ffd22f6f77c12e0f8f&language=en-US&page=${page}`
+        `https://api.themoviedb.org/3/trending/movie/day?api_key=d0605f7c77a7e9ffd22f6f77c12e0f8f&page=${page}`
       );
       setMovies(response.data.results);
     };
     getMovies();
   }, [page]);
+
+  //Banner carousel
+  useEffect(() => {
+    const getPopularMovies = async () => {
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/movie/popular?api_key=d0605f7c77a7e9ffd22f6f77c12e0f8f&language=en-US&page=1`
+      );
+      setBannerMovies(response.data.results.slice(0, 5));
+    };
+    getPopularMovies();
+  }, []);
 
   //Search results
   useEffect(() => {
@@ -50,6 +62,9 @@ const Home = () => {
         clearTimeout(cancelTimeout);
       };
     }
+    if (searchTerm.length === 0) {
+      setLoader(false);
+    }
   }, [searchTerm, page]);
 
   const pageHandler = (num) => {
@@ -59,6 +74,7 @@ const Home = () => {
   const searchHandler = (data) => {
     setSearchTerm(data);
     setLoader(true);
+    setPage(1);
   };
 
   const redirectHome = () => {
@@ -110,8 +126,7 @@ const Home = () => {
   return (
     <div className="home">
       <Navbar searchBar={true} searchList={searchHandler} loader={loader} />
-      {movies.length !== 0 && <Slider movie={movies.slice(0, 4)} />}
-      {/* <img className="banner" src={banner} alt="movie banner" /> */}
+      {bannerMovies.length !== 0 && <Slider movie={bannerMovies} />}
       {content}
     </div>
   );
