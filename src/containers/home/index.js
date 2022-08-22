@@ -90,6 +90,7 @@ const Home = () => {
   if (searchTerm.length === 0) {
     content = (
       <Pagination
+        originalData={[...movies]}
         data={movies}
         heading={"Trending"}
         findPage={pageHandler}
@@ -102,6 +103,7 @@ const Home = () => {
   if (result.length !== 0 && searchTerm.length !== 0) {
     content = (
       <Pagination
+        originalData={[...result]}
         data={result}
         heading={"Search results:"}
         findPage={pageHandler}

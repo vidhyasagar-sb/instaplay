@@ -28,7 +28,6 @@ const Card = (props) => {
 
     getMovieVideo(props.id);
   }, [props.id]);
-
   let content;
 
   if (hover && video) {

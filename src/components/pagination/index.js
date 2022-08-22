@@ -5,10 +5,18 @@ import "./pagination.scss";
 import leftArrow from "../../assets/images/leftArrow.svg";
 import rightArrow from "../../assets/images/rightArrow.svg";
 
-const Pagination = ({ data, heading, findPage, pageLimit, totalPage }) => {
+const Pagination = ({
+  originalData,
+  data,
+  heading,
+  findPage,
+  pageLimit,
+  totalPage,
+}) => {
   const navigate = useNavigate();
   const [pages] = useState(totalPage);
   const [currentPage, setCurrentPage] = useState(1);
+  const [selected, setSelected] = useState("");
 
   useEffect(() => {
     findPage(currentPage);
@@ -33,14 +41,42 @@ const Pagination = ({ data, heading, findPage, pageLimit, totalPage }) => {
     return new Array(pageLimit).fill().map((_, index) => start + index + 1);
   };
 
+  //Go to movie detail page
   const clickHandler = (id) => {
     navigate(`/detail/${id}`);
   };
+
+  //Sorting
+  const changeHandler = (e) => {
+    setSelected(e.target.value);
+  };
+
+  if (selected === "high") {
+    data.sort((a, b) => b.vote_average - a.vote_average); // b - a for reverse sort
+  }
+  if (selected === "low") {
+    data.sort((a, b) => a.vote_average - b.vote_average); // b - a for reverse sort
+  }
+  if (selected === "default") {
+    data = originalData;
+  }
 
   return (
     <div>
       <div className="headingContainer">
         <h2>{heading}</h2>
+        <select
+          className="sortDropdown"
+          value={selected}
+          onChange={changeHandler}
+        >
+          <option disabled value="">
+            Sort &nbsp; &darr; &uarr;
+          </option>
+          <option value="high">high - low</option>
+          <option value="low">low - high</option>
+          <option value="default">default</option>
+        </select>
       </div>
       <div className="cardWrapper">
         {data.map((movie, index) => {

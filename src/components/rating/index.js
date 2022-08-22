@@ -5,6 +5,7 @@ const Rating = (props) => {
   return (
     <div>
       <ReactStars
+        key={`stars_${props.value}`}
         size={18}
         value={Number(props.value)}
         edit={false}

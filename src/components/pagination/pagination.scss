@@ -5,6 +5,48 @@
   gap: 28px;
 }
 
+.headingContainer {
+  max-width: 1280px;
+  padding-left: 56px;
+  margin: 0 auto 32px auto;
+  display: flex;
+  justify-content: space-between;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    padding: 0;
+  }
+}
+
+.sortDropdown {
+  color: #fff;
+  border: none;
+  outline: none;
+  background: transparent;
+  margin-right: 75px;
+  font-size: 18px;
+  cursor: pointer;
+  font-family: inherit;
+
+  option {
+    color: #000;
+    margin: 10px;
+    font-size: 14px;
+  }
+  @media (max-width: 768px) {
+    margin: 0;
+  }
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  padding: 5px;
+}
+
 .paginationItem {
   background-color: transparent;
   border: none;
