@@ -69,7 +69,7 @@ const MovieDetail = () => {
   if (!loading && Object.keys(movieDetails).length !== 0) {
     return (
       <div className="movieDetail">
-        <Navbar />
+        <Navbar logoutFeature={true} />
         <div className="descriptionWrapper">
           <div className="movieDescription">
             <p className="leftArrow" onClick={goBackHomepage}>

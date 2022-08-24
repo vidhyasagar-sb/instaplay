@@ -42,6 +42,20 @@
   .load {
     background-image: url(../../assets/images/searchLoader.gif);
   }
+
+  .logoutButton {
+    cursor: pointer;
+    color: $color-white-0;
+    font-family: inherit;
+    font-size: 14px;
+    border: none;
+    background: transparent;
+
+    &:hover,
+    &:active {
+      color: $color-blue-2;
+    }
+  }
 }
 
 @media (max-width: 768px) {

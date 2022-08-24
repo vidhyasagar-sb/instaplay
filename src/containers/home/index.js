@@ -23,6 +23,7 @@ const Home = () => {
   //trending movies
   useEffect(() => {
     const getMovies = async () => {
+      // try{}
       const response = await axios.get(
         `https://api.themoviedb.org/3/trending/movie/day?api_key=d0605f7c77a7e9ffd22f6f77c12e0f8f&page=${page}`
       );
@@ -127,7 +128,12 @@ const Home = () => {
   }
   return (
     <div className="home">
-      <Navbar searchBar={true} searchList={searchHandler} loader={loader} />
+      <Navbar
+        searchBar={true}
+        searchList={searchHandler}
+        loader={loader}
+        logoutFeature={true}
+      />
       {bannerMovies.length !== 0 && <Slider movie={bannerMovies} />}
       {content}
     </div>
